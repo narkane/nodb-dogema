@@ -1,14 +1,13 @@
+//Library imports
 import React, { Component } from "react";
-import axios from "axios";
-import Tile from "./Tile.js";
-import logo from "./images/logo.png";
-import navlogo from "./images/nav-logo.png";
-import catholic from "./images/cat-holic.png";
-import ringleft from "./images/ringlef.png";
-import HUD from "./images/hudo.png";
-import "./App.css";
-import Create from "./Create.js";
+import Create from "./Create";
+import Tile from "./Tile";
 import rest from "./rest-cmds";
+
+//image imports
+import logo from "./images/logo.png";
+import HUD from "./images/hudo.png";
+
 //audio imports
 import music from "./audio/music.mp3";
 import sbuz from "./audio/buzz-s.wav";
@@ -16,6 +15,9 @@ import mbuz from "./audio/dbuz-m.wav";
 import whip from "./audio/whip-s.wav";
 import dink from "./audio/dink-s.wav";
 import lwow from "./audio/wow-l.wav";
+
+//CSS import
+import "./App.css";
 
 class App extends Component {
   constructor() {
@@ -131,6 +133,9 @@ class App extends Component {
             <br />
             <small>- BATTLE FOR THE SOULS OF THE BLESSED -</small>
           </header>
+          {/*  */}
+          {/*  */}
+          {/*  */}
         </div>
       );
     } else {
