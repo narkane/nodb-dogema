@@ -4,7 +4,7 @@ small {
 }
 
 .button-nav {
-  /* background-image: url("./centern.png"); */
+  /* background-image: url("./images/centern.png"); */
   width: 914px;
   display: flex;
   flex-direction: row;
@@ -19,14 +19,14 @@ small {
   justify-content: top;
   align-items: center;
   width: 100%;
-  background-image: url("./centern.png");
+  background-image: url("./images/centern.png");
   background-position-x: center;
   background-position-y: top;
   background-repeat: no-repeat;
 }
 
 button {
-  background-image: url("./button.png");
+  background-image: url("./images/button.png");
   background-repeat: round;
   display: flex;
   flex-direction: row;
@@ -63,7 +63,7 @@ button:hover {
 .App {
   position: absolute;
   text-align: center;
-  background-image: url("./bkgnd.jpg");
+  background-image: url("./images/bkgnd.jpg");
   height: 100%;
   width: 100%;
   /* max-height: 100vh;
@@ -151,7 +151,7 @@ button:hover {
   opacity: 0.93;
 }
 .Nav-text {
-  /* background-image: url("./cat-holic.png");
+  /* background-image: url("./images/cat-holic.png");
   background-repeat: round; */
   width: 100%;
 }
@@ -225,7 +225,7 @@ button:hover {
   /* position: relative;
   right: 0px; */
   /* z-index: 1; */
-  background-image: url("./ringlef.png");
+  background-image: url("./images/ringlef.png");
   background-repeat: no-repeat;
   background-position: right;
   mix-blend-mode: luminosity;
@@ -233,7 +233,7 @@ button:hover {
 .cat-ring-m {
   width: 100%;
   height: 116px;
-  background-image: url("./ringmid.png");
+  background-image: url("./images/ringmid.png");
   background-repeat: repeat-x;
   background-position: center;
   opacity: 0.9;
@@ -245,7 +245,7 @@ button:hover {
   margin: auto 0px;
   width: 0%;
   height: 116px;
-  background-image: url("./ringrig.png");
+  background-image: url("./images/ringrig.png");
   background-repeat: no-repeat;
   background-position: left;
   /* opacity: 0.6; */
@@ -261,7 +261,7 @@ button:hover {
 .catholic {
   animation: shake infinite 24s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   position: absolute;
-  background-image: url("./cat-holic.png");
+  background-image: url("./images/cat-holic.png");
   background-repeat: no-repeat;
   background-position-x: center;
   mix-blend-mode: lighten;
@@ -293,6 +293,25 @@ button:hover {
   60% {
     transform: perspective(10cm) translate3d(4px, 0, 0);
   }
+}
+
+#diagonal {
+  visibility: hidden;
+  animation: shake infinite 1.12s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  z-index: 1;
+  width: 510px;
+  border-top: 3px groove rgb(136, 42, 42);
+  box-shadow: 0 0 24px #ff2121;
+  opacity: 0.9;
+  /* border-style: ridge */
+  /* -webkit-transform: rotate(52deg);
+  -moz-transform: rotate(52deg);
+  -o-transform: rotate(52deg);
+  -ms-transform: rotate(52deg); */
+  transform: rotate(52deg);
+  position: absolute;
+  bottom: 300px;
+  left: calc(50vw - 100px);
 }
 /* @keyframes App-logo-spin {
   from {

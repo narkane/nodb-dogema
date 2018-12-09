@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Tile.css";
-import zing from "./zing.png";
+import zing from "./images/zing.png";
 
 class Tile extends Component {
   // constructor(props) {

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Tile from "./Tile.js";
-import logo from "./logo.png";
-import navlogo from "./nav-logo.png";
-import catholic from "./cat-holic.png";
-import ringleft from "./ringlef.png";
-import HUD from "./hudo.png";
+import logo from "./images/logo.png";
+import navlogo from "./images/nav-logo.png";
+import catholic from "./images/cat-holic.png";
+import ringleft from "./images/ringlef.png";
+import HUD from "./images/hudo.png";
 import "./App.css";
 import Create from "./Create.js";
+import rest from "./rest-cmds";
 //audio imports
 import music from "./audio/music.mp3";
 import sbuz from "./audio/buzz-s.wav";
@@ -27,16 +28,10 @@ class App extends Component {
       sDir: ""
     };
 
-    this.getCat = this.getCat.bind(this);
-    this.newHand = this.newHand.bind(this);
-    this.deleteCat = this.deleteCat.bind(this);
-    this.postCat = this.postCat.bind(this);
-    this.playA = this.playA.bind(this);
+    this.setCats = this.setCats.bind(this);
   }
 
   playA(audio, volume) {
-    // var audio = document.getElementById(audio);
-    // audio.play();
     //Set the current time for the audio file to the beginning
 
     //Create the audio tag
@@ -67,79 +62,35 @@ class App extends Component {
 
   showDeck() {
     console.log(this.state.cats);
-    return this.state.cats.map(cat => {
-      console.log("showdeck a 'new' cat " + cat.id);
-      return (
-        <Tile
-          className="Card"
-          cat={cat}
-          onClick={catID => this.selectCat(catID)}
-          onMouseEnter={catID => this.catScroll(catID)}
-          scroll={this.state.sDir}
-        />
-      );
-    });
+    if (this.state.cats.length != 0) {
+      console.log(this.state.cats);
+      return this.state.cats.map(cat => {
+        console.log("showdeck a 'new' cat " + cat.id);
+        return (
+          <Tile
+            className="Card"
+            cat={cat}
+            onClick={catID => this.selectCat(catID)}
+            onMouseEnter={catID => this.catScroll(catID)}
+            scroll={this.state.sDir}
+          />
+        );
+      });
+    }
+  }
+
+  setCats(catsGot) {
+    this.setState({ cats: catsGot });
   }
 
   selectCat(catID) {
     if (this.state.mode == "purrge") {
-      this.deleteCat(catID);
+      rest.deleteCat(catID, this.setCats);
       this.playA(dink, 1);
     } else if (this.state.mode == "mewtate") {
-      this.putCat(catID);
+      rest.putCat(catID, this.setCats);
       this.playA(lwow, 1);
     }
-  }
-
-  //GET
-  getCat() {
-    axios.get(`/api/cats/1`).then(response => {
-      // console.log(typeof response.data);
-      this.setState({ cats: response.data });
-      console.log("componentDidMount() GET: " + response.data[0]);
-    });
-  }
-  //GET
-  newHand(amount) {
-    axios.get(`/api/cats/${amount}`).then(response => {
-      // console.log(typeof response.data);
-      this.setState({ cats: response.data });
-      console.log("componentDidMount() GET: " + response.data[0]);
-    });
-  }
-  //DELETE
-  deleteCat(catID) {
-    console.log(catID);
-    this.setState({ cats: [] });
-    axios.delete(`/api/cats/${catID}`).then(response => {
-      this.setState({ cats: response.data });
-      console.log("DELETE: " + this.state.cats);
-      // console.log("state: " + this.state.cats[catLocalID].url);
-    });
-  }
-  //PUT
-  putCat(catID) {
-    this.setState({ cats: [] });
-    axios.put(`/api/cats/${catID}`).then(response => {
-      this.setState({ cats: response.data });
-      console.log("put: " + this.state.cats);
-      // console.log("state: " + this.state.cats[catLocalID].url);
-    });
-    // this.showDeck();
-  }
-  //POST
-  postCat(newCatURL, newCatID) {
-    let cat = {
-      url: newCatURL,
-      id: newCatID,
-      atk: "#",
-      def: "#"
-    };
-    axios.post(`/api/cats`, cat).then(response => {
-      // console.log(typeof response.data);
-      this.setState({ cats: response.data });
-      console.log("componentDidMount() GET: " + response.data[0]);
-    });
   }
 
   catScroll(catID) {
@@ -157,7 +108,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.newHand(3);
+    rest.newHand(3, this.setCats);
     // new Audio({ music }).play();
   }
 
@@ -185,6 +136,7 @@ class App extends Component {
     } else {
       return (
         <div className="App">
+          <div id="diagonal" />
           <div className="catholic" />
           <div className="App-battle">
             <img src={HUD} className="HUD" />
@@ -192,7 +144,8 @@ class App extends Component {
               <div className="Nav-logo" />
               <div className="c-nav">
                 <Create
-                  postCat={this.postCat}
+                  catSetter={this.setCats}
+                  postCat={rest.postCat}
                   onClick={() => this.playA(sbuz, 1)}
                 />
 
@@ -214,7 +167,7 @@ class App extends Component {
                   <button
                     className="catch-button"
                     onClick={() => {
-                      this.getCat();
+                      rest.getCat(this.setCats);
                       this.playA(mbuz, 1);
                     }}
                   >
@@ -230,19 +183,12 @@ class App extends Component {
               </div>
               <div className="Nav-logo">{/* <img src={navlogo} /> */}</div>
             </div>
-            {/* <div className="spacer" /> */}
             <div className="cat-ring">
               <div className="cat-ring-l" />
               <div className="cat-ring-m" />
               <div className="cat-ring-r" />
             </div>
-            <div className="Deck">
-              {/* {this.state.cats.map(cat => {
-                return this.showDeck(cat);
-              })} */
-              this.showDeck()}
-            </div>
-            {/*  */}
+            <div className="Deck">{this.showDeck()}</div>
           </div>
         </div>
       );

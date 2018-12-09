@@ -1,5 +1,5 @@
 input {
-  /* background-image: url("./button.png");
+  /* background-image: url("./images/button.png");
   background-repeat: repeat round; */
   color: white;
   background-color: black;
@@ -20,7 +20,7 @@ input {
   /* border-width: 0px; */
   /* padding: 0px 10px; */
   /* background-color: black; */
-  background-image: url("./button.png");
+  background-image: url("./images/button.png");
   /* background-size: contain; */
   background-repeat: round;
   border-radius: 14px 10px 16px 10px;
@@ -46,7 +46,7 @@ input {
 
 .c-text {
   height: calc(28pt - 2px);
-  background-image: url("./button.png");
+  background-image: url("./images/button.png");
   background-repeat: round;
   /* display: flex;
   flex-direction: column;

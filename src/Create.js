@@ -39,7 +39,11 @@ class Create extends Component {
         <button
           className="c-button"
           onClick={() => {
-            this.props.postCat(this.state.newCatURL, this.state.newCatID);
+            this.props.postCat(
+              this.state.newCatURL,
+              this.state.newCatID,
+              this.props.catSetter
+            );
             this.props.onClick();
           }}
         >
