@@ -1,0 +1,70 @@
+input {
+  /* background-image: url("./button.png");
+  background-repeat: repeat round; */
+  color: white;
+  background-color: black;
+  /* border-top-width: 0px;
+  border-bottom-width: 0px; */
+  /* border-width: 0px 12px; */
+  height: calc(14pt - 6px);
+  padding: 2px 2px 2px 4px;
+  margin: 0px 10px 0px 8px;
+  width: 600px;
+  border-color: black;
+  opacity: 0.7;
+}
+
+.c-button {
+  width: 68px;
+  font-weight: 550;
+  /* border-width: 0px; */
+  /* padding: 0px 10px; */
+  /* background-color: black; */
+  background-image: url("./button.png");
+  /* background-size: contain; */
+  background-repeat: round;
+  border-radius: 14px 10px 16px 10px;
+  /* border: 2px solid black; */
+  /* color: #0e0e0e; */
+  height: calc(28pt + 10px);
+  /* float: right; */
+  /* display: flex;
+  flex-direction: row;
+  justify-content: right; */
+}
+
+.create {
+  width: 800px;
+  margin: 7px 0px 0px 1px;
+  text-align: center;
+  /* height: calc(28pt + 18px); */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.c-text {
+  height: calc(28pt - 2px);
+  background-image: url("./button.png");
+  background-repeat: round;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: left; */
+  width: 58px;
+  padding: 10px 8px 0px 0px;
+  font-size: 9pt;
+  color: black;
+  font-weight: 550;
+  background-color: black;
+  border-radius: 10px 16px 10px 20px;
+  /* border: 2px solid black; */
+  text-align: right;
+  margin: 0 0 0 1px;
+}
+
+.c-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

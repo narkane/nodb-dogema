@@ -1,0 +1,132 @@
+.tile {
+  display: flex;
+  flex-flow: column;
+  background: #555555;
+  width: 220px;
+  height: 300px;
+  padding: 0px;
+  /* margin: 15px; */
+  border: 10px solid #000000;
+  border-radius: 10px;
+  /* mix-blend-mode: darken; */
+  transition: transform 0.5s ease-in-out;
+}
+.tile:hover {
+  transform: translateY(15px);
+}
+.tile:active {
+  animation: flip-card infinite 2s linear;
+}
+@keyframes flip-card {
+  from {
+    transform: perspective(20cm) translateY(15px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(20cm) translateY(15px) rotateY(360deg);
+  }
+}
+
+.zing {
+  opacity: 0.4;
+  width: 260px;
+  position: absolute;
+  /* right: 130px; */
+  top: 150px;
+  z-index: 5;
+}
+
+.pic-area {
+  display: flex;
+  flex-flow: column;
+
+  /* background-origin: border-box; */
+  z-index: 3;
+}
+
+.namebar {
+  font-weight: 500;
+  border-radius: 5px;
+  font-size: 10pt;
+  text-align: right;
+  padding: 0px 6px 0px 0px;
+  color: black;
+  background: #777777;
+  opacity: 0.8;
+  /* height: calc(10pt + 3px); */
+  width: auto;
+  margin: 8px 8px 0px 8px;
+  border: 1px solid #000;
+  z-index: 4;
+}
+
+.pic {
+  position: relative;
+  top: -22px;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  margin: 5px 8px 0px 8px;
+  height: calc(10pt + 165px);
+  width: auto;
+  z-index: 3;
+}
+
+.info {
+  position: relative;
+  top: 38px;
+  font-weight: 200;
+  border-radius: 5px;
+  font-size: 8pt;
+  text-align: left;
+  padding: 12px 0px 6px 5px;
+  color: black;
+  background: #999999;
+  /* height: calc(10pt + 3px); */
+  width: auto;
+  margin: 0px 9px 0px 9px;
+  z-index: 2;
+  /* border: 1px solid #000; */
+}
+
+.text {
+  color: black;
+  border-radius: 5px;
+  padding: 14px 28px 18px 4px;
+  text-align: center;
+  background: #bbbbbb;
+  width: 170px;
+  height: 30px;
+  margin: 20px 7px 0px 7px;
+  font-weight: 350;
+  font-size: 9pt;
+  position: relative;
+  top: 10px;
+  border: 2px solid #111111;
+  z-index: 1;
+}
+
+.quote {
+  padding: 10px 2px 14px 2px;
+  border-radius: 0px 0px 5px 5px;
+  background: #acacac;
+  text-align: center;
+  width: 198px;
+  font-style: italic;
+  margin: 0px 7px;
+  font-weight: 100;
+  color: black;
+  font-size: 8pt;
+  position: relative;
+  top: -8px;
+  border: 2px solid #111111;
+  border-width: 0px 2px 2px 2px;
+  z-index: 2;
+}
+
+.power {
+  font-size: 10pt;
+  font-weight: 400;
+  padding: 0px 4px;
+  float: right;
+  position: relative;
+  top: 10px;
+}
