@@ -61,6 +61,7 @@ button:hover {
   color: yellow;
 }
 .App {
+  cursor: crosshair;
   position: absolute;
   text-align: center;
   background-image: url("./images/bkgnd.jpg");
@@ -109,6 +110,8 @@ button:hover {
 }
 
 .App-battle {
+  /* cursor: url("./images/reticle.png"); */
+
   padding: 0px;
   font-size: 15pt;
   font-weight: 400;
@@ -302,6 +305,27 @@ button:hover {
   }
 }
 
+#reticle {
+  visibility: hidden;
+  /* height: 200px;
+  width: 250px; */
+  /* position: absolute; */
+  /* object-position: calc(var(calc(--mouse-y - 200px), 0) * 100%); */
+  /* top: calc(var(calc(--mouse-y - 200px), 0) * 100%); */
+  /* left: var(--mouse-x, 0);  */
+
+  /* background-image: url("./images/reticle.png");
+  background-position: var(--mouse-x, 0) var(--mouse-y, 0); */
+  /* background-position: calc(var(--mouse-x, 0) * 100%)
+    calc(var(--mouse-y, 0) * 100%); */
+  /* background-repeat: no-repeat; */
+  /* background: transparent
+    radial-gradient(
+      at calc(var(--mouse-x, 0) * 100%) calc(var(--mouse-y, 0) * 100%),)
+    no-repeat 0 0; */
+  /* z-index: 10; */
+}
+
 #diagonal {
   visibility: hidden;
   /* animation: shake infinite 1.12s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; */
@@ -326,10 +350,10 @@ button:hover {
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.98;
   }
   100% {
-    opacity: 0;
+    opacity: 0.9;
   }
 }
 

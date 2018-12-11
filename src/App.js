@@ -7,6 +7,7 @@ import rest from "./rest-cmds";
 //image imports
 import logo from "./images/logo.png";
 import HUD from "./images/hudo.png";
+import reticle from "./images/reticle.png";
 
 //audio imports
 import music from "./audio/music.mp3";
@@ -27,9 +28,14 @@ class App extends Component {
       begin: false,
       cats: [],
       mode: "",
-      sDir: ""
+      sDir: "",
+      catTurn: true,
+      cardDrawn: false,
+      beingAtkd: false
     };
 
+    this.beingAtkd = this.beingAtkd.bind(this);
+    this.setTurn = this.setTurn.bind(this);
     this.setCats = this.setCats.bind(this);
   }
 
@@ -63,11 +69,11 @@ class App extends Component {
   }
 
   showDeck() {
-    console.log(this.state.cats);
+    // console.log(this.state.cats);
     if (this.state.cats.length != 0) {
-      console.log(this.state.cats);
+      // console.log(this.state.cats);
       return this.state.cats.map(cat => {
-        console.log("showdeck a 'new' cat " + cat.id);
+        // console.log("showdeck a 'new' cat " + cat.id);
         return (
           <Tile
             className="Card"
@@ -85,14 +91,31 @@ class App extends Component {
     this.setState({ cats: catsGot });
   }
 
+  setTurn(turn) {
+    this.setState({ catTurn: turn });
+  }
+
   selectCat(catID) {
     if (this.state.mode == "purrge") {
       rest.deleteCat(catID, this.setCats);
       this.playA(dink, 1);
     } else if (this.state.mode == "mewtate") {
-      rest.putCat(catID, this.setCats);
-      this.playA(lwow, 1);
+      if (this.state.catTurn == true) {
+        rest.putCat(catID, this.setCats);
+        this.playA(lwow, 1);
+        // this.setState({ catTurn: false });
+      }
+    } else if (this.state.mode == "attack" && this.state.catTurn == true) {
+      rest.attack(catID, this.setCats);
+    } else if (this.state.mode == "defend") {
+      rest.defend(catID, this.setCats);
+      this.setState({ beingAtkd: false });
     }
+  }
+
+  beingAtkd(atk, def) {
+    alert(atk + ", " + def);
+    this.setState({ beingAtkd: true });
   }
 
   catScroll(catID) {
@@ -111,10 +134,23 @@ class App extends Component {
 
   componentDidMount() {
     rest.newHand(3, this.setCats);
+
     // new Audio({ music }).play();
   }
 
+  isTurn() {
+    if (this.state.catTurn == true) {
+      return <div className="catholic" />;
+    }
+  }
+
   render() {
+    setTimeout(
+      rest.getTurn(this.setTurn, this.beingAtkd, this.state.beingAtkd),
+      500
+    );
+
+    // console.log(y+", "+x)
     if (this.state.begin == false) {
       return (
         <div className="App">
@@ -141,12 +177,26 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <div id="diagonal" />
-          <div className="catholic" />
+          <img id="reticle" />
+          {this.isTurn()}
           <div className="App-battle">
             <img src={HUD} className="HUD" />
             <div className="Nav-bar">
               <div className="Nav-logo" />
+              <button
+                classID="ATTACK!"
+                onClick={() => {
+                  if (this.state.catTurn == true) {
+                    if (this.state.beingAtkd == false) {
+                      this.setState({ mode: "attack" });
+                    } else if (this.state.beingAtkd == true) {
+                      this.setState({ mode: "defend" });
+                    }
+                  }
+                }}
+              >
+                {this.state.catTurn == true ? "ATTACK" : "DEFEND"}
+              </button>
               <div className="c-nav">
                 <Create
                   catSetter={this.setCats}
@@ -158,7 +208,9 @@ class App extends Component {
                   <button
                     className="select-buttons mewtate"
                     onClick={() => {
-                      this.setState({ mode: "mewtate" });
+                      if (this.state.catTurn == true) {
+                        this.setState({ mode: "mewtate" });
+                      }
                     }}
                   >
                     <audio id="music" src={music} />
@@ -172,8 +224,13 @@ class App extends Component {
                   <button
                     className="catch-button"
                     onClick={() => {
-                      rest.getCat(this.setCats);
+                      if (
+                        this.state.catTurn == true &&
+                        this.state.cardDrawn == false
+                      )
+                        rest.getCat(this.setCats);
                       this.playA(mbuz, 1);
+                      this.setState({ cardDrawn: true });
                     }}
                   >
                     CAT-ch
